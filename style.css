@@ -1,0 +1,82 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+main{
+    background-color: #25D366;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+}
+#listaContatos{
+    width: 30%;
+    height: 100%;
+    background-color: #075E54;
+}
+
+.listaContatos input{
+    margin-top: 10px;
+    padding: 10px;
+    width: 70%;
+    border: none;
+    border-radius: 5px;
+    background-repeat: no-repeat;
+    align-items: start;
+    margin-left: 10px;
+    height: 30px;
+}
+
+.imagem{
+    border-bottom: 10px;
+    background-color: rgb(255, 255, 255);
+    height: 35px;
+    width: 35px;
+    border-radius: 30px;
+    margin-top: 2px;
+    margin-left: 10px;
+    display: flex;
+}
+.nomeContato{
+    width: 50%;
+    margin-left: 55px;
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+.contato{
+    background-color: #25D366;
+    border-top: solid 1px black;
+    border-bottom: solid 1px;
+    border-radius: 3px;
+    display: flex;
+    margin-top: 100px;
+}
+#telaContato{
+    width: 100%;
+    height: 60px;
+    margin-top: auto;
+    background-color: #128C7E;
+    display: flex;
+}
+img{
+    height: 25px;
+    margin-top: 18px;
+    margin-left: 50px;
+}
+.telaContato input{
+    margin-top: 10px;
+    padding: 10px;
+    width: 80%;
+    border: none;
+    border-radius: 5px;
+    background-repeat: no-repeat;
+    align-items: start;
+    margin-left: 10px;
+    height: 40px;
+}
+
+
+
+
