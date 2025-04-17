@@ -1,6 +1,6 @@
 'use strict'
 
-async function carregarContatosApi(){
+async function contatosApi(){
     const url = `https://projeto-whats-marcel.onrender.com/v1/whatsapp/contatos-para-usuarios/11966578996`
     const response = await fetch(url)
 
@@ -9,7 +9,7 @@ async function carregarContatosApi(){
     return data
 }
 
-async function carregarDadosConversasApi(nome) {
+async function dadosConversasApi(nome) {
     const url = `https://projeto-whats-marcel.onrender.com/v1/whatsapp/conversas-cada-usuario/cont/11966578996?cont=${nome}`
     const response = await fetch(url)
     
@@ -19,7 +19,7 @@ async function carregarDadosConversasApi(nome) {
 }
 
 async function abrirConversa(nome){
-    const dadosMensagens = await carregarDadosConversasApi(nome)
+    const dadosMensagens = await dadosConversasApi(nome)
     
     const containerConversa = document.querySelector('.telaInicial')
     containerConversa.replaceChildren('')
@@ -39,8 +39,8 @@ async function abrirConversa(nome){
                 pUsuarioTexto.textContent = itemConversas.content
 
                 conversaPropia.appendChild(h1Usuario)
-                conversaPropia.appendChild(pUsuarioHorario)
                 conversaPropia.appendChild(pUsuarioTexto)
+                conversaPropia.appendChild(pUsuarioHorario)
     
                 containerInvisivelUsuario.appendChild(conversaPropia)
                 containerConversa.appendChild(containerInvisivelUsuario)
@@ -58,8 +58,8 @@ async function abrirConversa(nome){
                 pContatoTexto.textContent = itemConversas.content
 
                 conversaContato.appendChild(h1Contato)
-                conversaContato.appendChild(pContatoHorario)
                 conversaContato.appendChild(pContatoTexto)
+                conversaContato.appendChild(pContatoHorario)
     
                 containerInvisivelContato.appendChild(conversaContato)
                 containerConversa.appendChild(containerInvisivelContato)
@@ -69,7 +69,7 @@ async function abrirConversa(nome){
 }
 
 async function criarLiDeContatos() {
-    const dadosContatos = await carregarContatosApi()
+    const dadosContatos = await contatosApi()
 
     const ul = document.getElementById('ulContato')
 
@@ -100,7 +100,6 @@ async function criarLiDeContatos() {
 
 // Inicializa a lista de contatos
 document.addEventListener('DOMContentLoaded', () => {
-    criarLiDeContatos()
     
     // Adiciona evento de envio de mensagem
     const enviarBtn = document.querySelector('.digitarConversa .enviar')
