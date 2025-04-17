@@ -11,44 +11,35 @@
 <body>
     <main>
         <!--Barra de contatos-->
-        <div class="listaContatos" id="listaContatos">
-            <div>
-                <input type="text" placeholder="Digite sua mensagem">
+        <div class="ContainerContato">
+            <div class="pesquisa">
+                <input type="text">
             </div>
-            <ul class="listandoContatos" id="contatoUl">
-                <li class="contato">
-                    <div class="imagemContato"></div>
-                    <div class="mensagemContato">
-                        <h1>Daniel Gomes Torres</h1>
+            <ul class="listaContatos" id="ulContato">
+                <li class="contatos">
+                    <div class="imgContato"></div>
+                    <div class="textos">
+                        <h1></h1>
+                        <p></p>
                     </div>
                 </li>
             </ul>
-            <hr>
         </div>
 
         <!--Tela de mensagens-->
-        <div class="telaDeConversas"  id="telaConversa">
-            <div class="container" id="container">
-                <div class="conversaDoContato">
-                    <h1>Peter Wilsen</h1>
-                    <p>10:52</p>
-                    <p>Hi Pedro, what do you doing?</p>
+        <div class="telaConversa">
+            <div class="conversas" id="conversas">
+                <div class="telaInicial">
+
+                </div>
+                <div class="digitarConversa">
+                    <input type="text" placeholder="Digite sua mensagem aqui">
+                    <div class="enviar"></div>
                 </div>
             </div>
         </div>
-        <div class="containerUsuario">
-            <div class="conversasDoUsuario">
-                <h1>Peter Wilsen</h1>
-                <p>10:52</p>
-                <p>Hi Pedro, what do you doing?</p>
-            </div>
-        </div>
                 
-        <!--Tela de mensagens do usuario-->
-        <div class="telaContato" id="telaContato">
-            <input type="text" placeholder="Digite sua mensagem" id="tela">
-            <img src="./icons8-enviado-50.png" alt="enviar  ">
-        </div>
+        
 
         </main>
 </body>

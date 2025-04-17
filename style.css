@@ -1,82 +1,234 @@
-*{
-    padding: 0;
+/* Reset Básico */
+* {
     margin: 0;
+    padding: 0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
 }
 
-main{
-    background-color: #25D366;
+body {
+    background-color: #e5ddd5;
     height: 100vh;
-    width: 100%;
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
-#listaContatos{
-    width: 30%;
+
+/* Layout Principal */
+main {
+    width: 96%;
+    max-width: 1400px;
+    height: 95vh;
+    background-color: #fff;
+    display: flex;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+/* Painel de Contatos */
+.ContainerContato {
+    width: 35%;
     height: 100%;
-    background-color: #075E54;
-}
-
-.listaContatos input{
-    margin-top: 10px;
-    padding: 10px;
-    width: 70%;
-    border: none;
-    border-radius: 5px;
-    background-repeat: no-repeat;
-    align-items: start;
-    margin-left: 10px;
-    height: 30px;
-}
-
-.imagem{
-    border-bottom: 10px;
-    background-color: rgb(255, 255, 255);
-    height: 35px;
-    width: 35px;
-    border-radius: 30px;
-    margin-top: 2px;
-    margin-left: 10px;
+    border-right: 1px solid #e0e0e0;
+    background-color: #f0f2f5;
     display: flex;
+    flex-direction: column;
 }
-.nomeContato{
-    width: 50%;
-    margin-left: 55px;
+
+/* Barra de Pesquisa */
+.pesquisa {
+    padding: 8px 10px;
+    background-color: #f0f2f5;
+}
+
+.pesquisa input {
+    width: 100%;
+    padding: 9px 12px 9px 30px;
+    border: none;
+    border-radius: 8px;
+    background-color: #fff;
+    font-size: 14px;
+    outline: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 16px;
+}
+
+/* Lista de Contatos */
+.listaContatos {
+    flex: 1;
+    overflow-y: auto;
+    background-color: #fff;
+}
+
+.contatos {
+    display: flex;
+    padding: 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f2f5;
+    transition: background-color 0.2s;
+}
+
+.contatos:hover {
+    background-color: #f5f5f5;
+}
+
+.imgContato {
+    width: 49px;
+    height: 49px;
+    border-radius: 50%;
+    background-color: #dfe5e7;
+    margin-right: 15px;
+    background-size: cover;
+    background-position: center;
+}
+
+.textos {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.textos h1 {
+    font-size: 17px;
+    font-weight: 500;
+    color: #111;
+    margin-bottom: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.textos p {
+    font-size: 14px;
+    color: #667781;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Área de Conversa */
+.telaConversa {
+    width: 65%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #e5ddd5;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAA+UlEQVQ4y+3UMUoDQRTG8Z8psJBUKTyAR7ATvIBgKTaCjRcQvICNnZ1XECy0sbK0EBQJ2Ag2FhZCrIR5wmRZdtZk0wcewzDz5v/emzczfKtSqVQqlUqlUqlUKpVKpVKpVCqVSqVSqfQ/egIeMI1xPMZ9jP9aN3jFJt5wgA2s4RzP2MZ1jH+tK7zH5B5OcI1HnOEE9zF2iZtfTbzjIib3cYh7XOAWR7jDZYxd4DZ3Yh+4isldHOAO57jBIe5xHmMXuM6d2MZ1TO7gGLc4ww2OcYPjGLvCVe7EOq5icgfHuMEprnGMG5zE2DWucyfWcBmTOzjGNU5wjRMc4xrHMXaDy9yJf5X5BvQkzSR9k/RJ0gdJ7yS9kfRK0gtJzyQ9kfRI0gNJ9yTdkXRL0g1J1yRdkXRJ0gVJ5ySdkXRK0glJxyQdkXRI0gFJ+yTtkbRL0g5J2yRtkbRJ0gZJ6yStkbRK0gpJyyQtkbRI0gJJ8yTNkTRL0gxJ0yRNkTRJ0gRJ4ySNkTRK0ghJwyQNkTRI0gBJ/ST1kdRLUg9J3SR1kdRJUgdJ7SS1kdRKUgtJzSQ1kdRIUgNJ9STVkVRLUg1J1SRVkVRJUgVJ5SSVkVRKUglJxSQVkVRIAg8fP2xQxqHZAAAAAElFTkSuQmCC');
+    background-repeat: repeat;
+}
+
+.conversas {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.telaInicial {
+    flex: 1;
+    padding: 10px 15%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Mensagens */
+.containerInvisivel {
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.containerInvisivelUsuario {
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.conversaContato {
+    max-width: 65%;
+    background-color: #fff;
+    border-radius: 0 8px 8px 8px;
+    padding: 6px 7px 8px 9px;
+    box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.conversaPropia {
+    max-width: 65%;
+    background-color: #d9fdd3;
+    border-radius: 8px 0 8px 8px;
+    padding: 6px 7px 8px 9px;
+    box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.conversaContato h1,
+.conversaPropia h1 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #128c7e;
+    margin-bottom: 2px;
+}
+
+.conversaContato p,
+.conversaPropia p {
+    font-size: 14.2px;
+    color: #111;
+    line-height: 19px;
+}
+
+.conversaContato p:last-child,
+.conversaPropia p:last-child {
+    font-size: 11px;
+    color: #667781;
+    text-align: right;
+    margin: 5px 0 -3px 0;
+}
+
+/* Área de Digitação */
+.digitarConversa {
+    background-color: #f0f2f5;
+    padding: 8px 12px;
     display: flex;
     align-items: center;
-    margin: 10px;
+    min-height: 62px;
 }
-.contato{
-    background-color: #25D366;
-    border-top: solid 1px black;
-    border-bottom: solid 1px;
-    border-radius: 3px;
-    display: flex;
-    margin-top: 100px;
-}
-#telaContato{
-    width: 100%;
-    height: 60px;
-    margin-top: auto;
-    background-color: #128C7E;
-    display: flex;
-}
-img{
-    height: 25px;
-    margin-top: 18px;
-    margin-left: 50px;
-}
-.telaContato input{
-    margin-top: 10px;
-    padding: 10px;
-    width: 80%;
+
+.digitarConversa input {
+    flex: 1;
+    padding: 9px 12px;
     border: none;
-    border-radius: 5px;
-    background-repeat: no-repeat;
-    align-items: start;
-    margin-left: 10px;
-    height: 40px;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    margin-right: 10px;
+    background-color: #fff;
 }
 
+.enviar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #008069;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s;
+}
 
+.enviar:hover {
+    background-color: #128c7e;
+}
 
+.enviar::after {
+    content: "→";
+    color: white;
+    font-size: 18px;
+}
 

@@ -1,66 +1,118 @@
 'use strict'
 
-async function pegarDados() {
+async function carregarContatosApi(){
+    const url = `https://projeto-whats-marcel.onrender.com/v1/whatsapp/contatos-para-usuarios/11966578996`
+    const response = await fetch(url)
 
-    const url = `https://one-projeto-2025.onrender.com/v1/whatsapp/v1/whatsapp/dados_de_contato_por_usuario/11987876567`
-
-    const response = await fetch(url) //FETCH é uma ferramenta que faz resuisição web e retorna uma resposta do servidor
     const data = await response.json()
-
-    return data.message
+    
+    return data
 }
 
-async function carregarMensagem(nome) {
-
-    const url = `https://one-projeto-2025.onrender.com/v1/whatsapp/dados_de_contato_para_cada_usuario/11955577796`
-
-    const response = await fetch(url) //FETCH é uma ferramenta que faz resuisição web e retorna uma resposta do servidor
+async function carregarDadosConversasApi(nome) {
+    const url = `https://projeto-whats-marcel.onrender.com/v1/whatsapp/conversas-cada-usuario/cont/11966578996?cont=${nome}`
+    const response = await fetch(url)
+    
     const data = await response.json()
 
-    return data.message
+    return data
 }
 
-async function criarMensagem() {
-    const dados = await carregarMensagem(nome)
+async function abrirConversa(nome){
+    const dadosMensagens = await carregarDadosConversasApi(nome)
+    
+    const containerConversa = document.querySelector('.telaInicial')
+    containerConversa.replaceChildren('')
+    dadosMensagens.mensagens.forEach(function(item){
+        item.forEach(function(itemConversas){
+            if(itemConversas.sender == "me"){
+                const containerInvisivelUsuario = document.createElement('div')
+                containerInvisivelUsuario.classList.add('containerInvisivelUsuario')
+                const conversaPropia = document.createElement('div')
+                conversaPropia.classList.add('conversaPropia')
+                const h1Usuario = document.createElement('h1')
+                const pUsuarioHorario = document.createElement('p')
+                const pUsuarioTexto = document.createElement('p')
 
-    const container = document.getElementById('telaConversa')
-    container.replaceChildren('')
+                h1Usuario.textContent = itemConversas.sender
+                pUsuarioHorario.textContent = itemConversas.time
+                pUsuarioTexto.textContent = itemConversas.content
 
-    dados.mensagens.forEach(function(item){
-        item.forEach(function(itemConversa){
-            if(itemConversa.enviar == 'me'){
+                conversaPropia.appendChild(h1Usuario)
+                conversaPropia.appendChild(pUsuarioHorario)
+                conversaPropia.appendChild(pUsuarioTexto)
+    
+                containerInvisivelUsuario.appendChild(conversaPropia)
+                containerConversa.appendChild(containerInvisivelUsuario)
+            }else{
+                const containerInvisivelContato = document.createElement('div')
+                containerInvisivelContato.classList.add('containerInvisivel')
+                const conversaContato = document.createElement('div')
+                conversaContato.classList.add('conversaContato')
+                const h1Contato = document.createElement('h1')
+                const pContatoHorario = document.createElement('p')
+                const pContatoTexto = document.createElement('p')
 
-            //puxar todos os elementos
-            const containerUsuario = document.createElement('div')
-            containerUsuario.classList.add(containerUsuario)
-            
-            const conversasDoUsuario = document.createElement('div')
-            conversasDoUsuario.classList.add(conversasDoUsuario)
+                h1Contato.textContent = itemConversas.sender
+                pContatoHorario.textContent = itemConversas.time
+                pContatoTexto.textContent = itemConversas.content
 
-            const h1 = document.createElement('h1')
-            const pTimeUsuario = document.createElement('p')
-            const pTextoUsuario = document.createElement('p')
-
-            h1.textContent = itemConversa.enviar
-            pTimeUsuario.textContent = itemConversa.tome
-            pTextoUsuario.textContent = itemConversa.content
-
-            conversasDoUsuario.appendChild(h1)
-            conversasDoUsuario.appendChild(pTimeUsuario)
-            conversasDoUsuario.appendChild(pTextoUsuario)
-
-            containerUsuario.appendChild(conversasDoUsuario)
-            conta
-
+                conversaContato.appendChild(h1Contato)
+                conversaContato.appendChild(pContatoHorario)
+                conversaContato.appendChild(pContatoTexto)
+    
+                containerInvisivelContato.appendChild(conversaContato)
+                containerConversa.appendChild(containerInvisivelContato)
             }
         })
     })
-    
-    
 }
 
+async function criarLiDeContatos() {
+    const dadosContatos = await carregarContatosApi()
 
+    const ul = document.getElementById('ulContato')
 
+    dadosContatos.forEach(function(item){
+        const liContato = document.createElement('li')
+        liContato.classList.add('contatos')
+        
+        liContato.addEventListener('click', () => abrirConversa(item.nome))
 
+        const divImage = document.createElement('div')
+        divImage.classList.add('imgContato')
+        
+        const divTextosCont = document.createElement('div')
+        divTextosCont.classList.add('textos')
+        const h1ListaContato = document.createElement('h1')
+        const pListaContato = document.createElement('p')
 
+        h1ListaContato.textContent = item.nome
+        pListaContato.textContent = item.descricao
 
+        liContato.appendChild(divImage)
+        divTextosCont.appendChild(h1ListaContato)
+        divTextosCont.appendChild(pListaContato)
+        liContato.appendChild(divTextosCont)
+        ul.appendChild(liContato)
+    })
+}
+
+// Inicializa a lista de contatos
+document.addEventListener('DOMContentLoaded', () => {
+    criarLiDeContatos()
+    
+    // Adiciona evento de envio de mensagem
+    const enviarBtn = document.querySelector('.digitarConversa .enviar')
+    enviarBtn.addEventListener('click', function() {
+        const input = document.querySelector('.digitarConversa input')
+        const mensagem = input.value.trim()
+        if(mensagem) {
+            // Aqui você pode adicionar a lógica para enviar a mensagem
+            console.log('Mensagem a enviar:', mensagem)
+            input.value = ''
+        }
+    })
+})
+
+criarLiDeContatos()
